@@ -1,0 +1,10 @@
+<div class="last card">
+  <div class="card_info">
+    <h3>Карточка питомца</h3>
+    <a>Кличка: {{dog.name}}</a>
+    <a>Тип: {{dog.type}}</a>
+    <a>Порода: {{dog.breed}}</a>
+    <a *ngIf="dog.type == 'собака'">Возраст: {{dog.age}}</a>
+    <a *ngIf="cat.type == 'кошка'">Подтвержденная родословная: {{cat.pedigree}}</a>
+  </div>
+</div>
