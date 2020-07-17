@@ -1,5 +1,5 @@
-import {Component, OnInit,} from '@angular/core';
-import {all, AnimalsService, Dog} from "../../services/animals.service";
+import {Component, OnInit} from '@angular/core';
+import {all, AnimalsService, Dog} from '../../services/animals.service';
 
 
 
@@ -9,21 +9,18 @@ import {all, AnimalsService, Dog} from "../../services/animals.service";
   styleUrls: ['./cards-list.component.scss']
 })
 export class CardsListComponent implements OnInit {
-  dogs: Dog[]
-  all: all[]
-  visibli = false
+  dogs: Dog[];
+  all: all[];
+  visibli = false;
 
 
   constructor(private AnimalService: AnimalsService) { }
-  takeAll() {
-    this.all = this.AnimalService.getDogs()
-    console.log(this.AnimalService.getDogs())
+  takeAll(): any {
+    this.all = this.AnimalService.getDogs();
     this.visibli = true;
   }
 
   ngOnInit(): void {
-  this.all = this.AnimalService.getDogs(3, 0)
-    console.log(this.all)
+  this.all = this.AnimalService.getDogs(3, 0);
   }
-
 }

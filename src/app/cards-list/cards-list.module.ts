@@ -1,8 +1,8 @@
-import {NgModule} from "@angular/core";
-import {CardsListComponent} from "./cards-list.component";
-import {CoreModule} from "../adding/core/core.module";
-import {RouterModule} from "@angular/router";
-import {CommonModule} from "@angular/common";
+import {NgModule} from '@angular/core';
+import {CardsListComponent} from './cards-list.component';
+import {CoreModule} from '../adding/core/core.module';
+import {RouterModule} from '@angular/router';
+import {CommonModule} from '@angular/common';
 
 
 @NgModule({

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Cat, Dog} from "../../services/animals.service";
+import {Cat, Dog} from '../../services/animals.service';
 
 
 @Component({
