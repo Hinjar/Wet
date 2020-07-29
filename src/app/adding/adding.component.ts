@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {allAnimals, AnimalsService, Cat, Dog} from '../../services/animals.service';
-import {from, Observable} from "rxjs";
-import {scan, take} from "rxjs/operators";
+import {from, Observable} from 'rxjs';
+import {scan, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-adding',
@@ -86,7 +86,7 @@ export class AddingComponent implements OnInit{
 
   ngOnInit(): void {
     this.getCard(1);
-    this.all.subscribe()
+    this.all.subscribe();
     // alert(this?.animals?.dog);
   }
 
