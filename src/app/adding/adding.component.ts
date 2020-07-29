@@ -29,7 +29,7 @@ export class AddingComponent implements OnInit{
   }
 
   addAnimal(): void {
-    if (this.typ !== ''  && this.age.toString() !== ''  && this.name !== ''){
+    if (this.typ !== ''  && this.age.toString() !== ''  && this.name !== '' && this.dogBreed != null){
       console.log(!!this.accept);
       if (this.typ === 'собака'){
         const dog: Dog = {
