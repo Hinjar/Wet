@@ -13,6 +13,9 @@ export class AddingComponent implements OnInit{
   berres: string[] = [];
   catBreed: 'русская' | 'голубая' | 'экзот' | 'сфинкс';
   dogBreed: 'овчарка' | 'такса' | 'пудель';
+  animals: {
+
+  };
 
   animalList: allAnimals;
   age = 1;
@@ -74,6 +77,7 @@ export class AddingComponent implements OnInit{
 
   ngOnInit(): void {
     this.animalList = this.AnimalService.takeLastDogs();
+    alert(this?.animals?.dog);
   }
 
 }

@@ -40,7 +40,6 @@ export class AnimalsService {
    const source$ = this.sbj.asObservable();
    return source$;
     }
-
     AddCard(item: any): void {
       this.animalSbj.pipe (scan((acc) => acc.concat(item), []))
         .subscribe((val) => {
