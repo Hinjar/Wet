@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {allAnimals, AnimalsService, Cat, Dog} from '../../services/animals.service';
+import {from, Observable} from "rxjs";
+import {scan, take} from "rxjs/operators";
 
 @Component({
   selector: 'app-adding',
@@ -8,6 +10,7 @@ import {allAnimals, AnimalsService, Cat, Dog} from '../../services/animals.servi
 })
 export class AddingComponent implements OnInit{
 
+  all: Observable<object>;
   typ: string;
   types: string[] = ['собака', 'кошка'];
   berres: string[] = [];
@@ -61,23 +64,30 @@ export class AddingComponent implements OnInit{
 
         this.AnimalService.AddCard(cat);
       }
-      this.animalList = this.AnimalService.takeLastDogs();
       console.log(this.animalList);
       this.name = this.typ = '';
     }
     else {
       alert('Введите все данные');
     }
+    this.getCard(1);
   }
 
-
+  getCard(count: number): void {
+    this.all = from(this.AnimalService.Animals).pipe(take(count), (scan((acc, v) => acc.concat(v), [])));
+    console.log(this.all);
+    this.all.subscribe((e) => {
+      console.log(e);
+    });
+  }
 
   constructor(public AnimalService: AnimalsService) {
   }
 
   ngOnInit(): void {
-    this.animalList = this.AnimalService.takeLastDogs();
-    alert(this?.animals?.dog);
+    this.getCard(1);
+    this.all.subscribe()
+    // alert(this?.animals?.dog);
   }
 
 }

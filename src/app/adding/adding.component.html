@@ -22,7 +22,7 @@
 
   <div class="last" >
     <h1 >Последний добавленный питомец</h1>
-    <app-card *ngIf="this.AnimalService.takeLastDogs() != '' "[dog]="animalList" [cat]="animalList"></app-card>
+    <app-card *ngFor="let a of all | async" [dog]="a" [cat]="a"></app-card>
   </div>
 
 

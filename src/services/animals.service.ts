@@ -43,39 +43,9 @@ export class AnimalsService {
     AddCard(item: any): void {
       this.animalSbj.pipe (scan((acc) => acc.concat(item), []))
         .subscribe((val) => {
-         this.Animals.push(val[0]);
+         this.Animals.unshift(val[0]);
     });
 
-    }
-
-    getDogs(limit = this.Animals.length, offset = 0): object {
-      return this.takeThreeElem(this.Animals, limit, offset);
-    }
-
-    takeThreeElem(mass: allAnimals[], limit, offset): object {
-      const newMass = [];
-      if (mass.length < 3){
-        for (let i = offset; i < mass.length; i++ ){
-          newMass.push(mass[i]);
-        }
-        return newMass;
-      }
-      else {
-        for (let i = offset; i < limit; i++ ){
-          newMass.push(mass[i]);
-        }
-        return newMass;
-      }
-    }
-
-    takeLastDogs(): any {
-      const dogs: any = this.getDogs();
-      if (dogs.length === 0){
-        return '';
-      }
-      else {
-        return dogs[dogs.length - 1];
-      }
     }
 
 
