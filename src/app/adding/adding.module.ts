@@ -1,7 +1,7 @@
 
 import {NgModule} from '@angular/core';
 import {AddingComponent} from './adding.component';
-import {CoreModule} from './core/core.module';
+import {CoreModule} from '../core.module';
 
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';

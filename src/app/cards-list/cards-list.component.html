@@ -1,8 +1,8 @@
 <div class="container">
   <h1>Картотека</h1>
-  <app-card *ngFor="let anim of all" [dog]="anim" [cat]="anim"></app-card>
+  <app-card *ngFor="let anim of all | async"  [dog]="anim" [cat]="anim"></app-card>
   <div class="buttn justify-content-around">
-    <button class="btn btn-dark w-100 h-100"  *ngIf="!visibli || all.length < 3" (click)="takeAll()">Показать все</button>
+    <button class="btn btn-dark w-100 h-100"  *ngIf=" this.AnimalService.Animals.length > 3 && !visibli" (click)="getCard(AnimalService.Animals.length)">Показать все</button>
     <button class="btn btn-success w-100 h-100" [routerLink]="['/']">Добавить питомца</button>
   </div>
 </div>

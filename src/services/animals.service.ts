@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {map, take} from 'rxjs/operators';
+import {BehaviorSubject, from, Observable} from 'rxjs';
+import {map, scan, take} from 'rxjs/operators';
 
 
 export interface Animal {
@@ -22,7 +22,7 @@ export class Dog implements Animal{
   age: number;
 }
 
-export type all = Dog | Cat;
+export type allAnimals = Dog | Cat;
 @Injectable({
   providedIn: 'root'
 })
@@ -30,30 +30,30 @@ export type all = Dog | Cat;
 
 
 export class AnimalsService {
-   private Animals: all[] = [
+    Animals: allAnimals[] = [
      {name: 'Дрейк', type: 'собака', breed: 'пудель', age: 5},
      ];
 
   private sbj = new BehaviorSubject(this.Animals);
 
-  get animalSbj(): any{
-   const source = this.sbj.asObservable();
-   return source;
+  get animalSbj(): Observable<object>{
+   const source$ = this.sbj.asObservable();
+   return source$;
     }
 
-    AddCard(item): any {
-      this.Animals.push(item);
-      this.animalSbj.pipe(take(1))
-        .subscribe(() => {
-          this.sbj.next(item);
+    AddCard(item: any): void {
+      this.animalSbj.pipe (scan((acc) => acc.concat(item), []))
+        .subscribe((val) => {
+         this.Animals.push(val[0]);
     });
+
     }
 
-    getDogs(limit = this.Animals.length, offset = 0): all[] {
+    getDogs(limit = this.Animals.length, offset = 0): object {
       return this.takeThreeElem(this.Animals, limit, offset);
     }
 
-    takeThreeElem(mass: all[], limit, offset): any {
+    takeThreeElem(mass: allAnimals[], limit, offset): object {
       const newMass = [];
       if (mass.length < 3){
         for (let i = offset; i < mass.length; i++ ){
@@ -70,13 +70,16 @@ export class AnimalsService {
     }
 
     takeLastDogs(): any {
-      const dogs: any[] = this.getDogs();
+      const dogs: any = this.getDogs();
       if (dogs.length === 0){
         return '';
       }
       else {
         return dogs[dogs.length - 1];
       }
-
     }
+
+
+
+
 }

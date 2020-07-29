@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { AnimalsService, Cat, Dog} from '../../services/animals.service';
+import {allAnimals, AnimalsService, Cat, Dog} from '../../services/animals.service';
 
 @Component({
   selector: 'app-adding',
@@ -11,13 +11,14 @@ export class AddingComponent implements OnInit{
   typ: string;
   types: string[] = ['собака', 'кошка'];
   berres: string[] = [];
-  berr: any = '';
-  any: any = '';
+  catBreed: 'русская' | 'голубая' | 'экзот' | 'сфинкс';
+  dogBreed: 'овчарка' | 'такса' | 'пудель';
+
+  animalList: allAnimals;
   age = 1;
   accept: boolean;
   name = '';
-  pedigree = '';
-
+  pedigree: 'да' | 'нет';
   showElem(): any {
   if (this.typ === 'собака'){
       this.berres = ['овчарка', 'такса', 'пудель'];
@@ -27,16 +28,17 @@ export class AddingComponent implements OnInit{
     }
   }
 
-  addAnimal(): any {
-    if (this.typ !== '' && this.berr !== '' && this.age.toString() !== ''  && this.name !== ''){
+  addAnimal(): void {
+    if (this.typ !== ''  && this.age.toString() !== ''  && this.name !== ''){
       console.log(!!this.accept);
       if (this.typ === 'собака'){
         const dog: Dog = {
           name: this.name,
           type: this.typ,
-          breed: this.berr,
+          breed: this.dogBreed,
           age: this.age
         };
+        console.log(dog);
         this.AnimalService.AddCard(dog);
       }
       if (this.typ === 'кошка'){
@@ -49,32 +51,29 @@ export class AddingComponent implements OnInit{
         const cat: Cat = {
           name: this.name,
           type: this.typ,
-          breed: this.berr,
+          breed: this.catBreed,
           pedigree: this.pedigree
         };
         console.log(this.accept);
 
         this.AnimalService.AddCard(cat);
       }
-      this.any = this.AnimalService.takeLastDogs();
-      console.log(this.any);
-      this.berr = this.name = this.typ = '';
+      this.animalList = this.AnimalService.takeLastDogs();
+      console.log(this.animalList);
+      this.name = this.typ = '';
     }
     else {
       alert('Введите все данные');
     }
-
-
   }
 
 
 
-  constructor(private AnimalService: AnimalsService) {
+  constructor(public AnimalService: AnimalsService) {
   }
 
   ngOnInit(): void {
-    console.log(this.any);
-    this.any = this.AnimalService.takeLastDogs();
+    this.animalList = this.AnimalService.takeLastDogs();
   }
 
 }

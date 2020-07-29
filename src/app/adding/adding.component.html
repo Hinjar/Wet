@@ -5,7 +5,7 @@
     <select class="form-control" [(ngModel)]="typ" (change)="showElem()">
       <option *ngFor="let type of types" [value]="type">{{type}}</option>
     </select>
-    <select class="form-control" [(ngModel)]="berr">
+    <select class="form-control" [(ngModel)]="catBreed" [(ngModel)]="dogBreed">
       <option *ngFor="let ber of berres" [value]="ber">{{ber}}</option>
     </select>
     <input *ngIf="typ==='собака'" class="form-control" type="number" placeholder="Введите возраст питомца" [(ngModel)]="age">
@@ -22,7 +22,7 @@
 
   <div class="last" >
     <h1 >Последний добавленный питомец</h1>
-    <app-card *ngIf="any != '' "[dog]="any" [cat]="any"></app-card>
+    <app-card *ngIf="this.AnimalService.takeLastDogs() != '' "[dog]="animalList" [cat]="animalList"></app-card>
   </div>
 
 

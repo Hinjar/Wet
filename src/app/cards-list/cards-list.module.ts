@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CardsListComponent} from './cards-list.component';
-import {CoreModule} from '../adding/core/core.module';
+import {CoreModule} from '../core.module';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 

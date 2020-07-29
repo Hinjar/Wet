@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {all, AnimalsService, Dog} from '../../services/animals.service';
-
-
+import {AnimalsService} from '../../services/animals.service';
+import {from, Observable} from 'rxjs';
+import {scan, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-cards-list',
@@ -9,18 +9,22 @@ import {all, AnimalsService, Dog} from '../../services/animals.service';
   styleUrls: ['./cards-list.component.scss']
 })
 export class CardsListComponent implements OnInit {
-  dogs: Dog[];
-  all: all[];
+  all: Observable<object>;
   visibli = false;
 
+  constructor(public AnimalService: AnimalsService) { }
 
-  constructor(private AnimalService: AnimalsService) { }
-  takeAll(): any {
-    this.all = this.AnimalService.getDogs();
+  getCard(count: number): void {
+    this.all = from(this.AnimalService.Animals).pipe(take(count), (scan((acc, v) => acc.concat(v), [])));
+    console.log(this.all);
+    this.all.subscribe((e) => {
+      console.log(e);
+    });
     this.visibli = true;
   }
 
   ngOnInit(): void {
-  this.all = this.AnimalService.getDogs(3, 0);
+    this.getCard(3);
+    this.visibli = false;
   }
 }
